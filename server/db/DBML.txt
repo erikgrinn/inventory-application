@@ -1,0 +1,43 @@
+Table media_types {
+  id integer [pk, increment]
+  name varchar(100) [not null, unique] // e.g., YouTube, Podcast, Newspaper
+  description text
+}
+
+Table sources {
+  id integer [pk, increment]
+  media_type_id integer [not null]
+  name varchar(200) [not null] // e.g., channel name, publication
+  url varchar(255)
+  description text
+}
+
+Table entries {
+  id integer [pk, increment]
+  source_id integer [not null]
+  title varchar(200) [not null]
+  description text
+  date_published date
+  location varchar(200)
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table craft {
+  id integer [pk, increment]
+  name varchar(100) [not null]         
+  description text
+  shape varchar(50)               
+  notes text
+}
+
+Table entry_craft {
+  entry_id integer [pk]
+  craft_id integer [pk]
+}
+
+// Relationships
+Ref: sources.media_type_id > media_types.id
+Ref: entries.source_id > sources.id
+Ref: entry_craft.entry_id > entries.id
+Ref: entry_craft.craft_id > craft.id
