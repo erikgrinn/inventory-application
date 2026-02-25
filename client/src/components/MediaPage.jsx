@@ -5,25 +5,28 @@ import styles from "../styles/app.module.css";
 // import axios from "axios";
 
 function MediaPage() {
+  const navigate = useNavigate();
+
   const [fetchedData, setFetchedData] = useState({ mediaTypes: [] });
   const [input, setInput] = useState("");
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    async function fetchAPI() {
-      // fetch
-      const response = await fetch("http://localhost:8080/media");
-      const data = await response.json();
-      console.log(data);
-      setFetchedData(data);
-
-      // axios
-      // const response = await axios.get("http://localhost:8080/api");
-      // console.log(response.data);
-      // setFetchedData(response.data);
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:8080/media");
+        const data = await response.json();
+        console.log(data);
+        const dataNames = data.mediaTypes.filter((entry) => entry.name);
+        setFetchedData({ mediaTypes: dataNames });
+        // axios
+        // const response = await axios.get("http://localhost:8080/api");
+        // console.log(response.data);
+        // setFetchedData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
-    fetchAPI();
+    fetchData();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -42,6 +45,7 @@ function MediaPage() {
     // useCallback wrap?
     // seems like a common "error" that doesnt really apply/false positive
     // there is also useEffectEvent
+    // looking at dealership db project, looks like try catch fixes it...
     navigate(0);
   };
 
@@ -49,7 +53,7 @@ function MediaPage() {
     <>
       <div className={styles.data}>
         {fetchedData.mediaTypes.map((mediaType, idx) => (
-          <li key={idx}>{mediaType}</li>
+          <li key={idx}>{mediaType.name}</li>
         ))}
       </div>
       <form onSubmit={handleSubmit}>

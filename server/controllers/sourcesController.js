@@ -22,12 +22,12 @@ async function getSources(req, res) {
 
 // error: null value in column "media_type_id" of relation "sources" violates not-null constraint
 async function createSourcePost(req, res) {
-  const { source } = req.body;
+  const { media_type_id, source } = req.body;
 
   console.log(source);
   if (!source) return res.end();
 
-  await pool.query("INSERT INTO sources (name) VALUES ($1)", [source]);
+  await pool.query("INSERT INTO sources (media_type_id, name) VALUES ($1, $2)", [media_type_id, source]);
   res.end();
 }
 

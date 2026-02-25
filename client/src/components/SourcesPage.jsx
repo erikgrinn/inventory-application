@@ -5,25 +5,47 @@ import styles from "../styles/app.module.css";
 // import axios from "axios";
 
 function SourcesPage() {
+  const navigate = useNavigate();
+
   const [fetchedData, setFetchedData] = useState({ sources: [] });
   const [input, setInput] = useState("");
 
-  const navigate = useNavigate();
+  const [dropdownOptions, setDropdownOptions] = useState({
+    mediaTypes: [],
+  });
+  const [selectedMediaType, setSelectedMediaType] = useState("");
 
   useEffect(() => {
-    async function fetchAPI() {
-      // fetch
-      const response = await fetch("http://localhost:8080/sources");
-      const data = await response.json();
-      console.log(data);
-      setFetchedData(data);
-
-      // axios
-      // const response = await axios.get("http://localhost:8080/api");
-      // console.log(response.data);
-      // setFetchedData(response.data);
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:8080/sources");
+        const data = await response.json();
+        console.log(data);
+        setFetchedData(data);
+        // axios
+        // const response = await axios.get("http://localhost:8080/api");
+        // console.log(response.data);
+        // setFetchedData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
-    fetchAPI();
+    async function fetchDropdownOptions() {
+      try {
+        const response = await fetch("http://localhost:8080/media");
+        const mediaTypesDataObject = await response.json();
+        const mediaTypesData = mediaTypesDataObject.mediaTypes;
+
+        setDropdownOptions({
+          mediaTypes: mediaTypesData,
+        });
+        console.log("Media Types:", mediaTypesData);
+      } catch (error) {
+        console.error("Error fetching dropdown options:", error);
+      }
+    }
+    fetchData();
+    fetchDropdownOptions();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -32,9 +54,11 @@ function SourcesPage() {
     await fetch("http://localhost:8080/sources/new", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ source: input }),
+      body: JSON.stringify({ media_type_id: selectedMediaType, source: input }),
     });
     setInput(""); // Clear input after submit
+    setSelectedMediaType("");
+
     // React Router v6+ will reload the current route/page
     // have to use this because defining fetchAPI outside of use effect
     // causes errors/warnings:
@@ -54,8 +78,17 @@ function SourcesPage() {
       </div>
       <form onSubmit={handleSubmit}>
         <input name="source" value={input} onChange={(e) => setInput(e.target.value)} placeholder="New Source" />
-        <br></br>
-        <button type="submit">Send</button>
+        <br />
+        <select name="mediaType" value={selectedMediaType} onChange={(e) => setSelectedMediaType(e.target.value)}>
+          <option value="">Select Media Type</option>
+          {dropdownOptions.mediaTypes.map((type) => (
+            <option key={type.id} value={type.id}>
+              {type.name}
+            </option>
+          ))}
+        </select>
+        <br />
+        <button type="submit">Submit</button>
       </form>
     </>
   );

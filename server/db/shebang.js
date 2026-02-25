@@ -12,6 +12,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 
 
 const SQL = `
+SELECT * FROM sources;
 `;
 
 async function seed() {

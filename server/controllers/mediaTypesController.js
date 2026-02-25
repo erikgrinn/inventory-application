@@ -5,7 +5,12 @@ async function getMediaTypes(req, res) {
   try {
     const { rows: mediaTypes } = await pool.query("SELECT * FROM media_types");
     console.log("Media Types: ", mediaTypes);
-    res.send({ "mediaTypes": mediaTypes.map((mediaType) => mediaType.name) });
+    res.send({
+      mediaTypes: mediaTypes.map((mediaType) => ({
+        id: mediaType.id,
+        name: mediaType.name,
+      })),
+    });
   } catch (error) {
     console.error("Error fetching:", error);
     res.status(500).json({
