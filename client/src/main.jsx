@@ -1,15 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter } from "react-router";
 import "./styles/index.css";
-import MediaTypes from "./components/MediaTypes";
+import App from "./App";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route index element={<MediaTypes />} />
-      </Routes>
+      <App />
     </BrowserRouter>
   </StrictMode>,
 );

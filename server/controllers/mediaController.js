@@ -15,13 +15,14 @@ async function getMediaTypes(req, res) {
   }
 }
 
+// this would be at backend 8080
 // async function createMediaGet(req, res) {
 //   res.sendFile(path.join(__dirname, "../forms/mediaForm.html"));
 // }
 
 async function createMediaPost(req, res) {
   const { media_type } = req.body;
-  
+
   console.log(media_type);
   if (!media_type) return res.end();
 

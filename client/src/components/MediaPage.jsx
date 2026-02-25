@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import styles from "../styles/app.module.css";
 // import axios from "axios";
 
-function MediaTypes() {
-  // useState needs to have structure for first render
+function MediaPage() {
   const [fetchedData, setFetchedData] = useState({ "Media Types": [] });
   const [input, setInput] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchAPI() {
@@ -32,6 +35,13 @@ function MediaTypes() {
       body: JSON.stringify({ media_type: input }),
     });
     setInput(""); // Clear input after submit
+    // React Router v6+ will reload the current route/page
+    // have to use this because defining fetchAPI outside of use effect
+    //  causes errors/warnings:
+    //  https://www.reddit.com/r/react/comments/1oifd5o/calling_setstate_synchronously_within_an_effect/
+    // useCallback wrap?
+    // seems like a common "error" that doesnt really apply/false positive
+    navigate(0);
   };
 
   return (
@@ -50,4 +60,4 @@ function MediaTypes() {
   );
 }
 
-export default MediaTypes;
+export default MediaPage;
