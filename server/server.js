@@ -18,12 +18,12 @@ app.use(cors(corsOptions));
 
 // use this for react/parsing stringified json
 // makes req content/object available in req.body
-app.use(express.json());
+// app.use(express.json());
 
 // use this for direct HTML form actions if needed instead
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
-app.use("/", mediaRouter);
+app.use("/media", mediaRouter);
 
 const PORT = 8080;
 app.listen(PORT, (error) => {

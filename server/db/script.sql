@@ -2,15 +2,14 @@
 INSERT INTO media_types (name, description) VALUES
   ('YouTube', 'Video sharing platform'),
   ('Podcast', 'Audio show'),
-  ('Newspaper', 'Print or online news'),
-  ('Person', 'Individual reporter or witness');
+  ('Newspaper', 'Print or online news');
 
 -- Insert into sources
 INSERT INTO sources (media_type_id, name, url, description) VALUES
   (1, 'UFO Sightings Daily', 'https://youtube.com/ufosightingsdaily', 'Popular UFO YouTube channel'),
   (2, 'The UFO Podcast', 'https://ufopodcast.com', 'Weekly podcast about UFOs'),
   (3, 'The Daily News', 'https://dailynews.com', 'Major newspaper'),
-  (4, 'Jane Doe', NULL, 'Independent UFO investigator');
+  (2, 'Jane Doe', NULL, 'Independent UFO investigator'); -- Jane Doe is now a podcast source
 
 -- Insert into entries
 INSERT INTO entries (source_id, title, description, date_published, location) VALUES
@@ -31,3 +30,15 @@ INSERT INTO entry_craft (entry_id, craft_id) VALUES
   (2, 2), -- Interview with Pilot Witness -> Tic Tac
   (3, 3), -- Strange Lights Reported -> Disk
   (4, 1); -- Personal Sighting in Park -> Black Triangle
+
+-- Insert into people
+INSERT INTO people (notes) VALUES
+  ('Witness: John Smith'),
+  ('Reporter: Jane Doe'),
+  ('Pilot: Charles Brown');
+
+-- Insert into entry_people
+INSERT INTO entry_people (entry_id, people_id) VALUES
+  (1, 1), -- John Smith witnessed Triangle UFO Over Nevada
+  (2, 3), -- Charles Brown is the pilot in Interview with Pilot Witness
+  (4, 2); -- Jane Doe is the reporter for Personal Sighting in Park

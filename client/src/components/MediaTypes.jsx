@@ -9,7 +9,7 @@ function MediaTypes() {
   useEffect(() => {
     async function fetchAPI() {
       // fetch
-      const response = await fetch("http://localhost:8080/");
+      const response = await fetch("http://localhost:8080/media");
       const data = await response.json();
       console.log(data);
       setFetchedData(data);
@@ -26,9 +26,7 @@ function MediaTypes() {
     <>
       <div className={styles.data}>
         {fetchedData["Media Types"].map((mediaType, idx) => (
-          <div key={idx}>
-            <div>{mediaType}</div>
-          </div>
+          <li key={idx}>{mediaType}</li>
         ))}
       </div>
     </>

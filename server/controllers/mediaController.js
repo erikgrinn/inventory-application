@@ -15,18 +15,19 @@ async function getMediaTypes(req, res) {
   }
 }
 
-// async function createUsernameGet(req, res) {
-//   res.sendFile(path.join(__dirname, "../form.html"));
-// }
+async function createMediaGet(req, res) {
+  res.sendFile(path.join(__dirname, "../forms/mediaForm.html"));
+}
 
-// async function createUsernamePost(req, res) {
-//   const { username } = req.body;
-//   await db.insertUsername(username);
-//   res.redirect("/");
-// }
+async function createMediaPost(req, res) {
+  const { media_type } = req.body;
+  console.log(media_type)
+  await pool.query("INSERT INTO media_types (name) VALUES ($1)", [media_type]);
+  res.redirect("/");
+}
 
 module.exports = {
   getMediaTypes,
-  //   createUsernameGet,
-  //   createUsernamePost,
+    createMediaGet,
+    createMediaPost,
 };

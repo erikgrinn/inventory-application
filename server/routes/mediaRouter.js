@@ -1,9 +1,11 @@
 const path = require("node:path");
-const { Router } = require("express");
-const { getMediaTypes } = require("../controllers/mediaController");
+const { Router, json } = require("express");
+const { getMediaTypes, createMediaGet, createMediaPost } = require("../controllers/mediaController");
 
 const mediaRouter = Router();
 
 mediaRouter.get("/", getMediaTypes);
+mediaRouter.get("/new", createMediaGet)
+mediaRouter.post("/new", createMediaPost)
 
 module.exports = mediaRouter;

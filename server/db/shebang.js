@@ -12,7 +12,6 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 
 
 const SQL = `
-SELECT * FROM media_types;
 `;
 
 async function seed() {

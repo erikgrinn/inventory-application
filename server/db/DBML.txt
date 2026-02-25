@@ -1,3 +1,6 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
 Table media_types {
   id integer [pk, increment]
   name varchar(100) [not null, unique] // e.g., YouTube, Podcast, Newspaper
@@ -36,8 +39,20 @@ Table entry_craft {
   craft_id integer [pk]
 }
 
+Table people {
+  id integer [pk, increment]
+  notes text
+}
+
+Table entry_people {
+  entry_id integer [pk]
+  people_id integer [pk]
+}
+
 // Relationships
-Ref: sources.media_type_id > media_types.id
-Ref: entries.source_id > sources.id
-Ref: entry_craft.entry_id > entries.id
-Ref: entry_craft.craft_id > craft.id
+Ref: sources.media_type_id > media_types.id [delete: cascade]
+Ref: entries.source_id > sources.id [delete: cascade]
+Ref: entry_craft.entry_id > entries.id [delete: cascade]
+Ref: entry_craft.craft_id > craft.id [delete: cascade]
+Ref: entry_people.entry_id > entries.id [delete: cascade]
+Ref: entry_people.people_id > people.id [delete: cascade]
