@@ -5,7 +5,7 @@ const { getMediaTypes, createMediaGet, createMediaPost } = require("../controlle
 const mediaRouter = Router();
 
 mediaRouter.get("/", getMediaTypes);
-mediaRouter.get("/new", createMediaGet)
+// mediaRouter.get("/new", createMediaGet)
 mediaRouter.post("/new", createMediaPost)
 
 module.exports = mediaRouter;
