@@ -1,6 +1,6 @@
 const path = require("node:path");
 const { Router } = require("express");
-const { getUsernames } = require("../controllers/controller");
+const { getUsernames } = require("../controllers/myController");
 
 const myRouter = Router();
 

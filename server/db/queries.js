@@ -1,6 +1,6 @@
 const pool = require("./pool");
 
-async function getAllUsernames() {
+async function getUsernames() {
   const { rows } = await pool.query("SELECT * FROM usernames");
   return rows;
 }
@@ -10,6 +10,6 @@ async function getAllUsernames() {
 // }
 
 module.exports = {
-  getAllUsernames,
+  getUsernames,
 //   insertUsername
 };

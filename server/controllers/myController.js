@@ -3,7 +3,7 @@ const path = require("node:path");
 
 
 async function getUsernames(req, res) {
-  const usernames = await db.getAllUsernames();
+  const usernames = await db.getUsernames();
   console.log("Usernames: ", usernames);
   res.send("Usernames: " + usernames.map((user) => user.username).join(", "));
 }

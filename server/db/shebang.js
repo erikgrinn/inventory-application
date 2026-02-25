@@ -23,7 +23,7 @@ INSERT INTO usernames (username)
 VALUES
   ('Bryan'),
   ('Odin'),
-  ('Damon');
+  ('Zeus');
 `;
 
 async function seed() {
