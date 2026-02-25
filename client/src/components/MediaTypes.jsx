@@ -5,6 +5,7 @@ import styles from "../styles/app.module.css";
 function MediaTypes() {
   // useState needs to have structure for first render
   const [fetchedData, setFetchedData] = useState({ "Media Types": [] });
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     async function fetchAPI() {
@@ -22,6 +23,17 @@ function MediaTypes() {
     fetchAPI();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent page reload (optional?)
+    // Send data to backend
+    await fetch("http://localhost:8080/media/new", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ media_type: input }),
+    });
+    setInput(""); // Clear input after submit
+  };
+
   return (
     <>
       <div className={styles.data}>
@@ -29,6 +41,11 @@ function MediaTypes() {
           <li key={idx}>{mediaType}</li>
         ))}
       </div>
+      <form onSubmit={handleSubmit}>
+        <input name="messageText" value={input} onChange={(e) => setInput(e.target.value)} placeholder="New Media" />
+        <br></br>
+        <button type="submit">Send</button>
+      </form>
     </>
   );
 }
