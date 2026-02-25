@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // import { MdLocalConvenienceStore } from "react-icons/md";
 
 const Navbar = () => {
   return (
     <nav>
-      <Link to="/">Home</Link>
-      <Link to="/media">Media</Link>
+      <NavLink to="/" end>
+        Home
+      </NavLink>
+      <NavLink to="/media">Media</NavLink>
+      <NavLink to="/sources">Sources</NavLink>
     </nav>
   );
 };

@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 
 const mediaRouter = require("./routes/mediaRouter");
+const sourcesRouter = require("./routes/sourcesRouter");
 
 const corsOptions = {
   origin: ["http://localhost:5173"], // vite
@@ -24,6 +25,7 @@ app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 
 app.use("/media", mediaRouter);
+app.use("/sources", sourcesRouter);
 
 const PORT = 8080;
 app.listen(PORT, (error) => {

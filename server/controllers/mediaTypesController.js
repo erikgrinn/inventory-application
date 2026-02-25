@@ -5,7 +5,7 @@ async function getMediaTypes(req, res) {
   try {
     const { rows: mediaTypes } = await pool.query("SELECT * FROM media_types");
     console.log("Media Types: ", mediaTypes);
-    res.send({ "Media Types": mediaTypes.map((mediaType) => mediaType.name) });
+    res.send({ "mediaTypes": mediaTypes.map((mediaType) => mediaType.name) });
   } catch (error) {
     console.error("Error fetching:", error);
     res.status(500).json({
@@ -21,12 +21,12 @@ async function getMediaTypes(req, res) {
 // }
 
 async function createMediaPost(req, res) {
-  const { media_type } = req.body;
+  const { mediaType } = req.body;
 
-  console.log(media_type);
-  if (!media_type) return res.end();
+  console.log(mediaType);
+  if (!mediaType) return res.end();
 
-  await pool.query("INSERT INTO media_types (name) VALUES ($1)", [media_type]);
+  await pool.query("INSERT INTO media_types (name) VALUES ($1)", [mediaType]);
   res.end();
 }
 

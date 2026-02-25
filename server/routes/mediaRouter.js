@@ -1,6 +1,6 @@
 const path = require("node:path");
 const { Router, json } = require("express");
-const { getMediaTypes, createMediaGet, createMediaPost } = require("../controllers/mediaController");
+const { getMediaTypes, createMediaGet, createMediaPost } = require("../controllers/mediaTypesController");
 
 const mediaRouter = Router();
 
