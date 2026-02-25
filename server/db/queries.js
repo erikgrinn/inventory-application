@@ -1,7 +1,8 @@
+// not used - middleman between pool and controller
 const pool = require("./pool");
 
-async function getUsernames() {
-  const { rows } = await pool.query("SELECT * FROM usernames");
+async function getMediaTypes() {
+  const { rows } = await pool.query("SELECT * FROM media_types");
   return rows;
 }
 
@@ -10,6 +11,6 @@ async function getUsernames() {
 // }
 
 module.exports = {
-  getUsernames,
+  getMediaTypes,
 //   insertUsername
 };

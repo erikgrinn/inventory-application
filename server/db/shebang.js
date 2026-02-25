@@ -12,7 +12,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 
 
 const SQL = `
-
+SELECT * FROM media_types;
 `;
 
 async function seed() {
@@ -21,7 +21,8 @@ async function seed() {
     connectionString: `postgresql://${DB_USER}:${DB_PASSWORD}@localhost:5432/inventory_application`,
   });
   await client.connect();
-  await client.query(SQL);
+  const result = await client.query(SQL);
+  console.log(result.rows)
   await client.end();
   console.log("done");
 }

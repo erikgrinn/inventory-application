@@ -2,13 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
 import "./styles/index.css";
-import App from "./components/App";
+import MediaTypes from "./components/MediaTypes";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route index element={<App />} />
+        <Route index element={<MediaTypes />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
