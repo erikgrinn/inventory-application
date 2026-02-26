@@ -73,7 +73,7 @@ function SourcesPage() {
     <>
       <div className={styles.data}>
         {fetchedData.sources.map((source, idx) => (
-          <li key={idx}>{source}</li>
+          <li key={idx}>{source.name}</li>
         ))}
       </div>
       <form onSubmit={handleSubmit}>
