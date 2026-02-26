@@ -77,10 +77,23 @@ function SourcesPage() {
         ))}
       </div>
       <form onSubmit={handleSubmit}>
-        <input name="source" value={input} onChange={(e) => setInput(e.target.value)} placeholder="New Source" />
+        <input
+          name="source"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="New Source"
+          required
+        />
         <br />
-        <select name="mediaType" value={selectedMediaType} onChange={(e) => setSelectedMediaType(e.target.value)}>
-          <option value="">Select Media Type</option>
+        <select
+          name="mediaType"
+          value={selectedMediaType}
+          onChange={(e) => setSelectedMediaType(e.target.value)}
+          required
+        >
+          <option value="" disabled>
+            Select Media Type
+          </option>
           {dropdownOptions.mediaTypes.map((type) => (
             <option key={type.id} value={type.id}>
               {type.name}

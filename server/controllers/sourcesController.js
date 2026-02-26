@@ -5,12 +5,7 @@ async function getSources(req, res) {
   try {
     const { rows: sources } = await pool.query("SELECT * FROM sources");
     console.log("Sources: ", sources);
-    res.send({
-      sources: sources.map((source) => ({
-        id: source.id,
-        name: source.name,
-      })),
-    });
+    res.send({ sources });
   } catch (error) {
     console.error("Error fetching:", error);
     res.status(500).json({

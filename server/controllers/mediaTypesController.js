@@ -5,12 +5,7 @@ async function getMediaTypes(req, res) {
   try {
     const { rows: mediaTypes } = await pool.query("SELECT * FROM media_types");
     console.log("Media Types: ", mediaTypes);
-    res.send({
-      mediaTypes: mediaTypes.map((mediaType) => ({
-        id: mediaType.id,
-        name: mediaType.name,
-      })),
-    });
+    res.send({ mediaTypes });
   } catch (error) {
     console.error("Error fetching:", error);
     res.status(500).json({
@@ -20,7 +15,7 @@ async function getMediaTypes(req, res) {
   }
 }
 
-// this would be at backend 8080
+// this would be at backend 8080 not using react
 // async function createMediaGet(req, res) {
 //   res.sendFile(path.join(__dirname, "../forms/mediaForm.html"));
 // }
@@ -37,6 +32,5 @@ async function createMediaPost(req, res) {
 
 module.exports = {
   getMediaTypes,
-  // createMediaGet,
   createMediaPost,
 };

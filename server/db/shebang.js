@@ -12,8 +12,10 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 
 
 const SQL = `
-SELECT * FROM sources;
-`;
+DELETE FROM media_types
+WHERE id NOT IN (
+  SELECT id FROM media_types ORDER BY id ASC LIMIT 3
+);`;
 
 async function seed() {
   console.log("seeding...");
