@@ -27,7 +27,10 @@ function MediaPage() {
   }
 
   useEffect(() => {
-    fetchData(); // this works just fine  -- false positive
+    // this works just fine  -- false positive
+    // otherwise can put function in use effect and reload page with navigate(0),
+    // but that is reload of whole page
+    fetchData(); 
   }, []);
 
   const handleSubmit = async (e) => {
