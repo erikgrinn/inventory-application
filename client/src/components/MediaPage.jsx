@@ -27,7 +27,7 @@ function MediaPage() {
   }
 
   useEffect(() => {
-    fetchData();
+    fetchData(); // this works just fine  -- false positive
   }, []);
 
   const handleSubmit = async (e) => {
