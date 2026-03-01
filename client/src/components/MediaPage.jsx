@@ -30,7 +30,22 @@ function MediaPage() {
     // this works just fine  -- false positive
     // otherwise can put function in use effect and reload page with navigate(0),
     // but that is reload of whole page
-    fetchData(); 
+    async function fetchDataEffect() {
+      try {
+        const response = await fetch("http://localhost:8080/media");
+        const data = await response.json();
+        console.log(data);
+        const dataNames = data.mediaTypes.filter((entry) => entry.name);
+        setFetchedData({ mediaTypes: dataNames });
+        // axios
+        // const response = await axios.get("http://localhost:8080/api");
+        // console.log(response.data);
+        // setFetchedData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchDataEffect();
   }, []);
 
   const handleSubmit = async (e) => {
